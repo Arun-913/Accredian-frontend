@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['js-cookie'], // Add 'js-cookie' to the external list
+      external: ['js-cookie'],
     },
   },
 })
