@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 
 export const SignIn = () =>{
@@ -13,12 +13,12 @@ export const SignIn = () =>{
     const handelOnClick = async(event: React.FormEvent) =>{
         event?.preventDefault();
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
                 name,
                 email,
                 password
             });
-            Cookies.set('authToken', response.data.token, {expires: 2});
+            // Cookies.set('authToken', response.data.token, {expires: 2});
             setError('');
             navigate('/');
         } catch (error) {

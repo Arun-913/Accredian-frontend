@@ -5,17 +5,18 @@ import { Footer } from "./Footer"
 import { QuestionAsked } from "./QuestionAsked"
 import { ReferOption } from "./ReferOption"
 import { Referral } from "./Referral"
-import Cookies from 'js-cookie';
-import { useState, useEffect } from "react";
+// import Cookies from 'js-cookie';
+import { useEffect } from "react";
 
 
 export const Landing = () =>{
-    const [authToken, setAuthToken] = useState<string>('');
+    // const [authToken, setAuthToken] = useState<string>('');
+    const authToken = 'arun';
 
     useEffect(() =>{
-        const authToken = Cookies.get('authToken');
+        // const authToken = Cookies.get('authToken');
         // @ts-ignore
-        setAuthToken(authToken);
+        // setAuthToken(authToken);
     }, [])
 
     return (
