@@ -13,13 +13,11 @@ export const SignIn = () =>{
     const handelOnClick = async(event: React.FormEvent) =>{
         event?.preventDefault();
         try {
-            console.log(name, email, password);
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
                 name,
                 email,
                 password
             });
-            console.log(response);
             Cookies.set('authToken', response.data.token, {expires: 2});
             setError('');
             navigate('/');

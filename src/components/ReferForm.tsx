@@ -14,8 +14,7 @@ export const ReferForm = () =>{
     const handelOnClick = async(event: React.FormEvent) =>{
         event?.preventDefault();
         try {
-            console.log(name, email, message);
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/referral`,
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/referral`,
                 {
                     name,
                     email,
@@ -27,7 +26,6 @@ export const ReferForm = () =>{
                     }
                 }
             );
-            console.log(response);
             setError('');
             alert('Form successfully submitted')
             navigate('/');
