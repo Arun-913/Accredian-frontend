@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-// import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import { authTokenState } from "./Atom";
+import { RecoilState, useRecoilState } from "recoil";
 
 export const SignIn = () =>{
     const [name, setName] =  useState<string>('');
@@ -9,15 +10,18 @@ export const SignIn = () =>{
     const [password, setPassword] =  useState<string>('');
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
+    // @ts-ignore
+    const [authToken, setAuthToken] = useRecoilState<RecoilState<string>>(authTokenState);
 
     const handelOnClick = async(event: React.FormEvent) =>{
         event?.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
                 name,
                 email,
                 password
             });
+            setAuthToken(response.data.token);
             // Cookies.set('authToken', response.data.token, {expires: 2});
             setError('');
             navigate('/');

@@ -1,27 +1,26 @@
 import logo from '../assets/images/logo.png';
 import downArrow from '../assets/images/down-arrow.png';
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
 import { useState, useEffect } from "react";
 
-export const AppBar = () =>{
+interface Props {
+    authToken: string;
+}
+
+export const AppBar: React.FC<Props> = ({ authToken }) =>{
     const [loginVisible, setLoginVisible] = useState<boolean>(true);
-    const [authToken, setAuthToken] = useState<string>('');
     const navigate = useNavigate();
     const [selected, setSelected] = useState<number>(0);
     const menuItems = ["Refer", "Benefits", "FAQs", "Support"];
 
     const handleTryForFreeButton = () =>{
-        if(!authToken){
+        if(authToken == ""){
             navigate('/');
         }
         navigate('/refer-form')
     }
 
     useEffect(() =>{
-        const authToken = Cookies.get('authToken');
-        // @ts-ignore
-        setAuthToken(authToken);
         if(authToken){
             setLoginVisible(false);
         }

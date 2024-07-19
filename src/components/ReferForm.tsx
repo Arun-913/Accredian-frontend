@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { authTokenState } from "./Atom";
 
 export const ReferForm = () =>{
     const [name, setName] =  useState<string>('');
     const [email, setEmail] =  useState<string>('');
     const [message, setMessage] =  useState<string>('');
     const [error, setError] = useState<string>('');
-    // const [authToken, setAuthToken] = useState<string>('');
     const navigate = useNavigate();
+    const authToken = useRecoilValue(authTokenState);
 
     const handelOnClick = async(event: React.FormEvent) =>{
         event?.preventDefault();
@@ -22,7 +23,7 @@ export const ReferForm = () =>{
                 },
                 {
                     headers: {
-                        // Authorization: `Bearer ${authToken}`
+                        Authorization: `Bearer ${authToken}`
                     }
                 }
             );
@@ -37,11 +38,9 @@ export const ReferForm = () =>{
 
     useEffect(() =>{
         // const authToken = Cookies.get('authToken');
-        // if(!authToken){
-        //     navigate('/signin');
-        // }
-        // // @ts-ignore
-        // setAuthToken(authToken);
+        if(!authToken){
+            navigate('/signin');
+        }
     }, [])
 
     return (
